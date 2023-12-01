@@ -5,6 +5,9 @@ import AuthService from '../../services/auth.service';
 import { jwtDecode } from "jwt-decode";
 import styles from './login.module.css';
 import Link from 'next/link';
+
+// Page for login / Register 
+
 //------------------------------------------------------------------------------------------------------------------------------
 function LoginPage() {
     const router = useRouter();
