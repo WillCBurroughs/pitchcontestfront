@@ -143,7 +143,7 @@ export default function Home() {
   return (
     <>
       <main className={`${styles.main}`}>
-        <Input value={searchTerm} onChange={handleSearch} />
+        <Input value={searchTerm} onChange={handleSearch} holder = {"search for competitions"} />
 
         <Button onClick={handleButtonClick} text="Create Funding Opportunity" />
         <Button onClick={handleMakeCompetitionClick} text="Go to Make Competition" />

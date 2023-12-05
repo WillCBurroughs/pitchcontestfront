@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Input = ({ value, onChange }) => {
+const Input = ({ value, onChange, holder }) => {
   return (
     <input
       type="text"
       value={value}
       onChange={onChange}
-      placeholder="Search by name..."
+      placeholder = {holder}
     />
   );
 };
