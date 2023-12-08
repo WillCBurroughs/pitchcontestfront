@@ -11,6 +11,8 @@ import axios, { Axios } from "axios";
 import Htag from '../components/atoms/Htag';
 import Input from '@/components/atoms/Input';
 import Button from '@/components/atoms/button';
+import CustomNavbar from '@/components/organisms/CustomNavbar';
+
 
 
 export default function Competition() {
@@ -22,9 +24,23 @@ export default function Competition() {
 //     setPitchCompetitions(filtered);
 //   }
 
-  const handleCompetitionSelect = (event) => {
+const handleCompetitionSelect = (event) => {
     setSelectedCompetition(event.target.value);
+    console.log('Selected Competition:', event.target.value); // Log the selected competition
+    // Assuming certain competitions trigger the display of business and applicant requirements
+    if (event.target.value !== '') {
+      setShowBusinessRequirements(true);
+      setShowApplicantRequirements(true);
+      console.log('Business and Applicant Requirements should display.'); // Log to verify conditions are met
+    } else {
+      setShowBusinessRequirements(false);
+      setShowApplicantRequirements(false);
+      console.log('Business and Applicant Requirements should hide.'); // Log to verify conditions are met
+    }
   };
+
+
+
 
   const [pitchCompetitions, setPitchCompetitions] = useState([]);
 
@@ -105,7 +121,8 @@ export default function Competition() {
                 }
             );
             console.log(filteredComp);
-            const competitions = filteredComp.map((item) => item.fund_name);
+            // const competitions = filteredComp.map((item) => item.fund_name);
+            const competitions = filteredComp
             console.log(competitions);
             setPitchCompetitions(competitions);
           }
@@ -133,6 +150,7 @@ export default function Competition() {
           amount_equity_taken: amountEquityTaken,
           fund_host_id: state.user.sub 
         };
+     
   // Change this above if have time 
 
     const updatedResponse = await axios.get("http://127.0.0.1:8000/api/v1/funding/");
@@ -161,10 +179,62 @@ export default function Competition() {
     router.push('/');
   };
 
+  const [showBusinessRequirements, setShowBusinessRequirements] = useState(false);
+  const [showApplicantRequirements, setShowApplicantRequirements] = useState(false);
+
+  const [businessRequirement, setBusinessRequirement] = useState('');
+  const [applicantRequirement, setApplicantRequirement] = useState('');
+
+  const handleBusinessRequirementChange = (event) => {
+    setBusinessRequirement(event.target.value);
+  };
+
+  const handleApplicantRequirementChange = (event) => {
+    setApplicantRequirement(event.target.value);
+  };
+
+  const [genderRequirements, setGenderRequirements] = useState([]);
+
+  const handleGenderRequirementChange = (event) => {
+    const selectedGender = event.target.value;
+    if (event.target.checked) {
+      setGenderRequirements([...genderRequirements, selectedGender]);
+    } else {
+      const updatedGenderRequirements = genderRequirements.filter((gender) => gender !== selectedGender);
+      setGenderRequirements(updatedGenderRequirements);
+    }
+  };
+
+  const handleRequirementsClick = async () => {
+    try {
+      const requirementsBody = {
+        fund_id: selectedCompetition,
+        requirement_id: 3, // Assuming requirement ID for gender requirement is 3
+        data: genderRequirements.join(','), // Save the concatenated selected gender requirements as data
+      };
+  
+      // Make a POST request to save the gender requirements for the selected competition
+      const requirementResponse = await axios.post(
+        'http://127.0.0.1:8000/api/v1/funding-opp-req/',
+        requirementsBody
+      );
+
+    //   http://127.0.0.1:8000/api/v1/funding/
+  
+      console.log('Funding Opportunity Requirement Response:', requirementResponse.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
+
   return (
     <>
+      <CustomNavbar activeLink="competition" />
       <main className={`${styles.main}`}>
         
+      
         <div className="row">
         <div className='col-md-6'>
         <Input value={competitionName} onChange={handleNameInputChange} holder = {"Competition Name"}/>
@@ -199,6 +269,11 @@ export default function Competition() {
             max={100}
         />
         )}
+
+        <br/>
+
+        <Button onClick={handleButtonClick} text="Create Funding Opportunity" />
+
         </div>
 
         <div className='col-md-6'>
@@ -207,17 +282,62 @@ export default function Competition() {
               <select value={selectedCompetition} onChange={handleCompetitionSelect}>
                 <option value="">Select a Pitch Competition</option>
                 {pitchCompetitions.map((competition, index) => (
-                  <option key={index} value={competition}>{competition}</option>
+                  <option key={index} value={competition.id}>{competition.fund_name}</option>
                 ))}
               </select>
 
+              {showBusinessRequirements && (
+              <select value={businessRequirement} onChange={handleBusinessRequirementChange}>
+                <option value="">Select a Business Requirement</option>
+                {/* Populate business requirements options */}
+              </select>
+            )}
+
+            {showApplicantRequirements && (
+              <select value={applicantRequirement} onChange={handleApplicantRequirementChange}>
+                <option value="">Select an Applicant Requirement</option>
+                {/* Populate applicant requirements options */}
+                <option value="Gender">Gender Requirement</option>
+                {/* Add 'Gender Requirement' option */}
+              </select>
+            )}
+
+            {showApplicantRequirements && applicantRequirement === 'Gender' && (
+              <div>
+                <p>Competition is open to:</p>
+                <label>
+                  <input
+                    type="checkbox"
+                    value="Male"
+                    onChange={handleGenderRequirementChange}
+                  /> Men
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    value="Women"
+                    onChange={handleGenderRequirementChange}
+                  /> Women
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    value="Other"
+                    onChange={handleGenderRequirementChange}
+                  /> Other
+                </label>
+              </div>
+            )}
+
+            <br/>
+            <Button onClick={handleRequirementsClick} text="Set Requirements" />
+
         </div>
         </div>
 
         </div>
 
 
-        <Button onClick={handleButtonClick} text="Create Funding Opportunity" />
         <Button onClick={handleMakeCompetitionClick} text="Go Back to Competitions" />
 
         <div className={styles.grid}>

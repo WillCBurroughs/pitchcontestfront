@@ -11,15 +11,43 @@ import axios, { Axios } from "axios";
 import Htag from '../components/atoms/Htag';
 import Input from '@/components/atoms/Input';
 import Button from '@/components/atoms/button';
-
+import Icon from '@/components/atoms/icon';
+import CustomNavbar from '@/components/organisms/CustomNavbar';
+import { ToggleSlider }  from "react-toggle-slider";
 
 export default function Home() {
 
   let [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAmount, setSelectedAmount] = useState('');
-  const [selectedEquity, setSelectedEquity] = useState('all'); // Set default value to 'all'
+  const [selectedEquity, setSelectedEquity] = useState('all'); 
   const [filteredData, setFilteredData] = useState([]);
+
+  const [filterbyUser, setFilterbyUser] = useState(false);
+  const [getfiltered, setfiltered] = useState(); 
+  
+  const [getUserInfo, setUserInfo] = useState(); 
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/v1/users/4");
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+  
+    fetchUserInfo();
+  }, []);
+
+  console.log(getUserInfo)
+ 
+  
+
+  const handleFilterByUserChange = () => {
+    setFilterbyUser((prev) => !prev); // Update by click
+  };
 
   useEffect(() => {
     let fetchData = async () => {
@@ -34,9 +62,23 @@ export default function Home() {
     fetchData();
   }, []);
 
+  
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  useEffect(() => {
+    let getFiltered = async () => {
+      try {
+        const getFilter = await axios.get("http://127.0.0.1:8000/api/v1/funding/19/")
+        setData(getFilter.data);
+      }
+      catch(error) {
+        console.error("Error Fetching Data:", error)
+      }
+    }
+  })
 
   const amounts = [
     { label: '$0', value: 0 },
@@ -140,12 +182,28 @@ export default function Home() {
     router.push('/makeCompetition');
   };
 
+
+
   return (
     <>
+      <CustomNavbar activeLink="home" />
       <main className={`${styles.main}`}>
+
+
+        <div className={styles.toggleContainer}>
+          <label className={styles.toggleLabel}>
+            Filter by User
+            <input
+              type="checkbox"
+              checked={filterbyUser}
+              onChange={handleFilterByUserChange}
+            />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+
         <Input value={searchTerm} onChange={handleSearch} holder = {"search for competitions"} />
 
-        <Button onClick={handleButtonClick} text="Create Funding Opportunity" />
         <Button onClick={handleMakeCompetitionClick} text="Go to Make Competition" />
 
         <div className={styles.dropdownsContainer}>
@@ -172,12 +230,30 @@ export default function Home() {
         </div>
 
         <div>
+      {!filterbyUser && (
+        <div>
           {filteredData.map((item, index) => (
             <Htag
               key={index}
               text={`${item.fund_name} - Funds Available: ${item.fund_amount} equity taken ${item.amount_equity_taken}%`}
             />
           ))}
+        </div>
+      )}
+      {filterbyUser && getUserInfo.gender && (
+        <div>
+          {filteredData.map((item, index) => {
+            const passesRequirements = item.requirements.length === 0 || item.requirements[0].data.toLowerCase().includes(getUserInfo.gender.toLowerCase());
+
+            return (
+              <Htag
+                key={index}
+                text={`${item.fund_name} - Requirements: ${passesRequirements ? 'Passes' : 'Does not pass'}`}
+              />
+            );
+          })}
+        </div>
+      )}
         </div>
 
         <div className={styles.grid}>
