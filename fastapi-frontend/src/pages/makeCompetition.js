@@ -139,6 +139,7 @@ const handleCompetitionSelect = (event) => {
     router.push('/');
   };
   
+    //   Edit below to fix error 
     const handleButtonClick = async () => {
       try {
         const requestBody = {
@@ -153,17 +154,21 @@ const handleCompetitionSelect = (event) => {
      
   // Change this above if have time 
 
-    const updatedResponse = await axios.get("http://127.0.0.1:8000/api/v1/funding/");
-    const updatedCompetitions = updatedResponse.data
-        .filter((item) => item.host_id == state.user.sub)
-        .map((item) => item.fund_name);
-
-    setPitchCompetitions(updatedCompetitions);
 
       const response = await axios.post(
         'http://127.0.0.1:8000/api/v1/funding/',
         requestBody
       );
+
+      const updatedResponse = await axios.get("http://127.0.0.1:8000/api/v1/funding/");
+      console.log(updatedResponse)
+
+      const updatedCompetitions = updatedResponse.data
+          .filter((item) => item.host_id == state.user.sub)
+          .map((item) => item.fund_name);
+  
+      setPitchCompetitions(updatedResponse.data);
+    
   
       console.log('Response:', response.data);
     } catch (error) {
@@ -190,7 +195,14 @@ const handleCompetitionSelect = (event) => {
   };
 
   const handleApplicantRequirementChange = (event) => {
+    const selectedRequirement = event.target.value;
     setApplicantRequirement(event.target.value);
+
+    if (selectedRequirement === 'Gender') {
+        setRequirementSelected(3); // Gender requirement ID
+      } else if (selectedRequirement === 'Veteran') {
+        setRequirementSelected(4);
+      }
   };
 
   const [genderRequirements, setGenderRequirements] = useState([]);
@@ -205,13 +217,45 @@ const handleCompetitionSelect = (event) => {
     }
   };
 
+  const [requirementSelected, setRequirementSelected] = useState(0);
+
+  const handleRequirementSelectedChange = (event) => {
+    setRequirementSelected(event.target.value);
+  };
+
+  const [veteranStatus, setVeteranStatus] = useState('');
+
+  const handleVeteranStatusChange = (event) => {
+    setVeteranStatus(event.target.value);
+  };
+  
+  const requirementHandlers = {
+    Gender: () => ({ requirement_id: 3, data: "gender:" + genderRequirements.join(',') }),
+    Veteran: () => ({ requirement_id: 4, data: "is_veteran:" + handleVeteranStatus() }),
+    // Add more requirement handlers as needed
+  };
+
+    const handleVeteranStatus = () => {
+        return veteranStatus; 
+    };
+
   const handleRequirementsClick = async () => {
     try {
-      const requirementsBody = {
-        fund_id: selectedCompetition,
-        requirement_id: 3, // Assuming requirement ID for gender requirement is 3
-        data: genderRequirements.join(','), // Save the concatenated selected gender requirements as data
-      };
+    //   const requirementsBody = {
+    //     fund_id: selectedCompetition,
+    //     requirement_id: requirementSelected, 
+    //     data: genderRequirements.join(','), 
+    //   };
+    const selectedHandler = requirementHandlers[applicantRequirement];
+
+
+    if (selectedHandler) {
+        const requirementData = selectedHandler();
+        const requirementsBody = {
+          fund_id: selectedCompetition,
+          ...requirementData,
+        };
+
   
       // Make a POST request to save the gender requirements for the selected competition
       const requirementResponse = await axios.post(
@@ -222,6 +266,7 @@ const handleCompetitionSelect = (event) => {
     //   http://127.0.0.1:8000/api/v1/funding/
   
       console.log('Funding Opportunity Requirement Response:', requirementResponse.data);
+    }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -299,6 +344,7 @@ const handleCompetitionSelect = (event) => {
                 {/* Populate applicant requirements options */}
                 <option value="Gender">Gender Requirement</option>
                 {/* Add 'Gender Requirement' option */}
+                <option value="Veteran">Veteran Requirement</option>
               </select>
             )}
 
@@ -327,6 +373,17 @@ const handleCompetitionSelect = (event) => {
                   /> Other
                 </label>
               </div>
+            )}
+
+            {showApplicantRequirements && applicantRequirement === 'Veteran' && (
+            <div>
+                <p>Veteran Status:</p>
+                <select value={veteranStatus} onChange={handleVeteranStatusChange}>
+                <option value="">Select Veteran Status</option>
+                <option value="Veteran">Only Veterans</option>
+                <option value="Non-Veteran">All aplicants</option>
+                </select>
+            </div>
             )}
 
             <br/>

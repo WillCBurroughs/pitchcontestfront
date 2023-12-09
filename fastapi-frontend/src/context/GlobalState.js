@@ -17,6 +17,7 @@ function reducer(state, action) {
   }
 }
 
+
 // Provider component to wrap the app
 export function GlobalStateProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);

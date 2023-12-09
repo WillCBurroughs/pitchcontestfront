@@ -25,6 +25,14 @@ export default function Home() {
 
   const [columnValueGender, setColumnValueGender] = useState('');
 
+  const [selectedMilitaryStatus, setSelectedMilitaryStatus] = useState('');
+
+  const handleMilitaryStatusChange = (event) => {
+    setSelectedMilitaryStatus(event.target.value);
+  };
+
+
+
   const handleIdentityChange = (event) => {
     setSelectedIdentity(event.target.value);
   };
@@ -56,11 +64,31 @@ export default function Home() {
       requestBody
     );
 
-    console.log('Response:', response.data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleSaveUserVeteranClick = async () => {
+    try {
+      const requestBody = {
+        // user_id: state.user.sub,
+        // column_name: "gender",
+        // column_value: selectedIdentity,
+        accept: "application/json"
+      };
+   
+    const response = await axios.put(
+      `http://127.0.0.1:8000/api/v1/userscolumn/${state.user.sub}?column_name=is_veteran&column_value=${selectedMilitaryStatus}`,
+      requestBody
+    );
+
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const amounts = [
     { label: '$0', value: 0 },
@@ -101,14 +129,25 @@ export default function Home() {
       <CustomNavbar activeLink="none" />
       <main className={`${styles.main}`}>
 
+
+
       <div className="dropdown">
           <select value={selectedIdentity} onChange={handleIdentityChange}>
-            <option value="">Question I identify as...</option>
+            <option value="">I identify as</option>
             <option value="male">Man</option>
             <option value="women">Woman</option>
             <option value="other">Other</option>
           </select>
           <Button onClick={handleSaveUserClick} text = "Save"/>
+        </div>
+
+        <div className="dropdown">
+          <select value={selectedMilitaryStatus} onChange={handleMilitaryStatusChange}>
+            <option value="">Select Military Status</option>
+            <option value="Veteran">Veteran</option>
+            <option value="Non-Veteran">Non-Veteran</option>
+          </select>
+          <Button onClick={handleSaveUserVeteranClick} text = "Save"/>
         </div>
 
         <div className={styles.grid}>
