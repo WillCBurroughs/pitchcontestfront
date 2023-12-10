@@ -189,169 +189,184 @@ export default function Home() {
 
   return (
     <>
-      
       <CustomNavbar activeLink="home" />
-      <main className={`${styles.main}`}>
-        <form className="d-flex me-0 p-0" style = {{marginBottom: "-80px"}}>
-          <input
-            className="form-control me-2 ps-4"
-            style={{ minWidth: "1000px", borderRadius: "40px"}}
-            type="search"
-            placeholder="Find Opportunities"
-            aria-label="Search"
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-          <button className="btn btn-outline-primary" type="submit">
-            Search
-          </button>
-        </form>
+      <main className={`${styles.main} container`}>
+        <div className="row">
+          <form className="d-flex me-0 p-0">
+            <input
+              className="form-control me-2 ps-4"
+              style={{ minWidth: "1000px", borderRadius: "40px" }}
+              type="search"
+              placeholder="Find Opportunities"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+            <button className="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </form>
 
-        <div className="container-fluid" style={{position: 'absolute', top: '130px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: '800px', width: '1100px'}}>
-          <div className="row mt-2" style={{ display: "flex" }}>
-            <div className="col">
-              <div className="btn-group">
-                <button
-                  type="button"
-                  className="btn btn-primary dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  placeholder="All Comps"
-                  style={{
-                    backgroundColor: "#3178e4",
-                    minWidth: "70px",
-                    float: "right",
-                  }}
-                >
-                  <span className="ms-auto">
-                    {" "}
-                    {selectedEquity === ""
-                      ? "Select Equity"
-                      : selectedEquity == "all"
-                      ? "All Competitions"
-                      : "Equity Not Taken"}
-                  </span>
-                </button>
-                <ul className="dropdown-menu">
-                  {equities.map((equities, index) => (
-                    <li key={index}>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => handleEquityChange(equities.value)}
-                      >
-                        {equities.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+          <div
+            className="d-flex pb-4 justify-content-between"
+            style={{
+              // position: "absolute",
+              // top: "130px",
+              // display: "flex",
+              // justifyContent: "space-between",
+              // alignItems: "center",
+
+            }}
+          >
+            <div className="row mt-2" style={{ display: "flex" }}>
+              <div className="col">
+                <div className="btn-group">
+                  <button
+                    type="button"
+                    className="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    placeholder="All Comps"
+                    style={{
+                      backgroundColor: "#3178e4",
+                      minWidth: "70px",
+                      float: "right",
+                    }}
+                  >
+                    <span className="ms-auto">
+                      {" "}
+                      {selectedEquity === ""
+                        ? "Select Equity"
+                        : selectedEquity == "all"
+                        ? "All Competitions"
+                        : "Equity Not Taken"}
+                    </span>
+                  </button>
+                  <ul className="dropdown-menu">
+                    {equities.map((equities, index) => (
+                      <li key={index}>
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={() => handleEquityChange(equities.value)}
+                        >
+                          {equities.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="col pb-5">
+                <div className="btn-group">
+                  <button
+                    type="button"
+                    className="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    placeholder="All Comps"
+                    style={{
+                      backgroundColor: "#3178e4",
+                      minWidth: "70px",
+                      float: "right",
+                    }}
+                  >
+                    <span className="ms-auto">
+                      {" "}
+                      {selectedAmount === ""
+                        ? "Fund Amount"
+                        : selectedAmount === 0
+                        ? "Fund Amount"
+                        : "$" + selectedAmount}
+                    </span>
+                  </button>
+                  <ul className="dropdown-menu">
+                    {amounts.map((amount, index) => (
+                      <li key={index}>
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={() => handleAmountChange(amount.value)}
+                        >
+                          {amount.value == 0 ? "All" : amount.label}
+                          {console.log("Display")}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
 
-            <div className="col">
-              <div className="btn-group">
-                <button
-                  type="button"
-                  className="btn btn-primary dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  placeholder="All Comps"
-                  style={{
-                    backgroundColor: "#3178e4",
-                    minWidth: "70px",
-                    float: "right",
-                  }}
-                >
-                  <span className="ms-auto">
-                    {" "}
-                    {selectedAmount === ""
-                      ? "Fund Amount"
-                      : selectedAmount === 0
-                      ? "Fund Amount"
-                      : "$" + selectedAmount}
-                  </span>
-                </button>
-                <ul className="dropdown-menu">
-                  {amounts.map((amount, index) => (
-                    <li key={index}>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => handleAmountChange(amount.value)}
-                      >
-                        {amount.value == 0 ? "All" : amount.label}
-                        {console.log("Display")}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-                    
-          <div className="row mt-2">
-            <div className="col">
-              <div className="form-check form-switch">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                  checked={filterbyUser}
-                  onChange={handleFilterByUserChange}
-                />
-                <label
-                  className="form-check-label"
-                  for="flexSwitchCheckDefault"
-                >
-                  Filter Competitions
-                </label>
+            <div className="row mt-2">
+              <div className="col">
+                <div className="form-check form-switch">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                    checked={filterbyUser}
+                    onChange={handleFilterByUserChange}
+                  />
+                  <label
+                    className="form-check-label"
+                    for="flexSwitchCheckDefault"
+                  >
+                    Filter Competitions
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-
-        <div>
+        <div className="row">
+          
           {!filterbyUser && (
-            <div>
+            <>
               {filteredData.map((item, index) => (
-
-            <Competition
-              key={index}
-
-              backgroundColor={
-                item.fund_type === 1
-                  ? "#000000"
-                  : item.fund_type === 2
-                  ? "#3178E4"
-                  : item.fund_type === 3
-                  ? "#17c27e"
-                  : "#ffffff"
-              }
-              imageSrc= {item.fund_type === 1 ?
-              "https://www.uiw.edu/hebsba/_imgs/events/pitch-competition-2020-promo-in-body-aligned.jpg" :
-              item.fund_type === 2 ? "https://aofund.org/app/uploads/2023/06/pexels-sora-shimazaki-5668858-1024x683.jpg" :
-              "https://ssir.org/images/blog/Abby-Davidson-Matt-Guttentag-entrepreneur-accelerators-592x392.jpg"
-
-              }
-              competitionTitle= {item.fund_name != "" ? item.fund_name : "New Contest"}
-              fundingAmount= {item.fund_amount}
-              equityTaken= {item.equity_taken ? "True" : "False"}
-              competitionType={
-                item.fund_type === 1
-                  ? "Pitch"
-                  : item.fund_type === 2
-                  ? "Grant"
-                  : item.fund_type === 3
-                  ? "Accelerator"
-                  : "Default Type"
-              }
-              equityPercentage= {item.amount_equity_taken}
-            />
-
+                <>
+                <div className="col-1"></div>
+                <Competition
+                  key={index}
+                  backgroundColor={
+                    item.fund_type === 1
+                      ? "#000000"
+                      : item.fund_type === 2
+                      ? "#3178E4"
+                      : item.fund_type === 3
+                      ? "#17c27e"
+                      : "#ffffff"
+                  }
+                  imageSrc={
+                    item.fund_type === 1
+                      ? "https://www.uiw.edu/hebsba/_imgs/events/pitch-competition-2020-promo-in-body-aligned.jpg"
+                      : item.fund_type === 2
+                      ? "https://aofund.org/app/uploads/2023/06/pexels-sora-shimazaki-5668858-1024x683.jpg"
+                      : "https://ssir.org/images/blog/Abby-Davidson-Matt-Guttentag-entrepreneur-accelerators-592x392.jpg"
+                  }
+                  competitionTitle={
+                    item.fund_name != "" ? item.fund_name : "New Contest"
+                  }
+                  fundingAmount={item.fund_amount}
+                  equityTaken={item.equity_taken ? "True" : "False"}
+                  competitionType={
+                    item.fund_type === 1
+                      ? "Pitch"
+                      : item.fund_type === 2
+                      ? "Grant"
+                      : item.fund_type === 3
+                      ? "Accelerator"
+                      : "Default Type"
+                  }
+                  equityPercentage={item.amount_equity_taken}
+                />
+                
+                </>
               ))}
-            </div>
+            </>
           )}
           {filterbyUser && (
             <div>
@@ -394,16 +409,12 @@ export default function Home() {
               })}
             </div>
           )}
+          
         </div>
+        
+        <></>
 
-      <>
-
-
-      
-      </>
-      
-
-{/* 
+        {/* 
         <div className={styles.grid}>
           {state.user ? (
             <li className="nav-item">
@@ -426,12 +437,7 @@ export default function Home() {
         >
           Go to Make Competition
         </button> */}
-
       </main>
-
-      
     </>
   );
-
-  
 }

@@ -10,15 +10,15 @@ const Competition = ({
   equityPercentage
 }) => {
   return (
-    <div className="border" style={{
-      marginLeft: "0px",
-      marginBottom: "70px",
-      marginTop: "-60px",
+    <div className="border col-11 pb-5 mb-2" style={{
+    //   marginLeft: "0px",
+    //   marginBottom: "70px",
+    //   marginTop: "-60px",
       minWidth: "800px",
       borderRadius: "3px",
       height: "170px",
       width: "1100px",
-      paddingLeft: "300px",
+    //   paddingLeft: "300px",
       position: "relative",
       backgroundColor: "#ffffff"
     }}>
