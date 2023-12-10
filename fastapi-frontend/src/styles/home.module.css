@@ -1,7 +1,6 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 2rem;
   min-height: 100vh;
@@ -406,4 +405,12 @@ input:not(:placeholder-shown) ~ .reset {
 
 .selectColor {
   color: white
+}
+
+.almost-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
 }

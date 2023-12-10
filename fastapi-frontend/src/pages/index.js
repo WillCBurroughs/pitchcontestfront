@@ -209,14 +209,15 @@ export default function Home() {
 
           <div
             className="d-flex pb-4 justify-content-between"
-            style={{
-              // position: "absolute",
-              // top: "130px",
-              // display: "flex",
-              // justifyContent: "space-between",
-              // alignItems: "center",
-
-            }}
+            style={
+              {
+                // position: "absolute",
+                // top: "130px",
+                // display: "flex",
+                // justifyContent: "space-between",
+                // alignItems: "center",
+              }
+            }
           >
             <div className="row mt-2" style={{ display: "flex" }}>
               <div className="col">
@@ -323,47 +324,45 @@ export default function Home() {
         </div>
 
         <div className="row">
-          
           {!filterbyUser && (
             <>
               {filteredData.map((item, index) => (
                 <>
-                <div className="col-1"></div>
-                <Competition
-                  key={index}
-                  backgroundColor={
-                    item.fund_type === 1
-                      ? "#000000"
-                      : item.fund_type === 2
-                      ? "#3178E4"
-                      : item.fund_type === 3
-                      ? "#17c27e"
-                      : "#ffffff"
-                  }
-                  imageSrc={
-                    item.fund_type === 1
-                      ? "https://www.uiw.edu/hebsba/_imgs/events/pitch-competition-2020-promo-in-body-aligned.jpg"
-                      : item.fund_type === 2
-                      ? "https://aofund.org/app/uploads/2023/06/pexels-sora-shimazaki-5668858-1024x683.jpg"
-                      : "https://ssir.org/images/blog/Abby-Davidson-Matt-Guttentag-entrepreneur-accelerators-592x392.jpg"
-                  }
-                  competitionTitle={
-                    item.fund_name != "" ? item.fund_name : "New Contest"
-                  }
-                  fundingAmount={item.fund_amount}
-                  equityTaken={item.equity_taken ? "True" : "False"}
-                  competitionType={
-                    item.fund_type === 1
-                      ? "Pitch"
-                      : item.fund_type === 2
-                      ? "Grant"
-                      : item.fund_type === 3
-                      ? "Accelerator"
-                      : "Default Type"
-                  }
-                  equityPercentage={item.amount_equity_taken}
-                />
-                
+                  <div className="col-1"></div>
+                  <Competition
+                    key={index}
+                    backgroundColor={
+                      item.fund_type === 1
+                        ? "#000000"
+                        : item.fund_type === 2
+                        ? "#3178E4"
+                        : item.fund_type === 3
+                        ? "#17c27e"
+                        : "#ffffff"
+                    }
+                    imageSrc={
+                      item.fund_type === 1
+                        ? "https://www.uiw.edu/hebsba/_imgs/events/pitch-competition-2020-promo-in-body-aligned.jpg"
+                        : item.fund_type === 2
+                        ? "https://aofund.org/app/uploads/2023/06/pexels-sora-shimazaki-5668858-1024x683.jpg"
+                        : "https://ssir.org/images/blog/Abby-Davidson-Matt-Guttentag-entrepreneur-accelerators-592x392.jpg"
+                    }
+                    competitionTitle={
+                      item.fund_name != "" ? item.fund_name : "New Contest"
+                    }
+                    fundingAmount={item.fund_amount}
+                    equityTaken={item.equity_taken ? "True" : "False"}
+                    competitionType={
+                      item.fund_type === 1
+                        ? "Pitch"
+                        : item.fund_type === 2
+                        ? "Grant"
+                        : item.fund_type === 3
+                        ? "Accelerator"
+                        : "Default Type"
+                    }
+                    equityPercentage={item.amount_equity_taken}
+                  />
                 </>
               ))}
             </>
@@ -371,7 +370,6 @@ export default function Home() {
           {filterbyUser && (
             <div>
               {filteredData.map((item, index) => {
-                // Recently added
                 let passesAllRequirements = true;
 
                 item.requirements.forEach((requirement) => {
@@ -384,34 +382,58 @@ export default function Home() {
                     .includes(getUserInfo[firstWord].toLowerCase());
 
                   if (!passesRequirement) {
-                    passesAllRequirements = false; // If any requirement fails, set the flag to false
+                    passesAllRequirements = false;
                   }
                 });
 
-                // const firstWord = item.requirements.length !== 0 ? item.requirements[0].data.split(':')[0].toLowerCase().trim() : '';
-                // console.log(firstWord)
-                // console.log(getUserInfo.is_veteran)
+                if (passesAllRequirements) {
+                  return (
+                    <div key={index}>
+                      <div className="col-1"></div>
+                      <Competition
+                        key={index}
+                        backgroundColor={
+                          item.fund_type === 1
+                            ? "#000000"
+                            : item.fund_type === 2
+                            ? "#3178E4"
+                            : item.fund_type === 3
+                            ? "#17c27e"
+                            : "#ffffff"
+                        }
+                        imageSrc={
+                          item.fund_type === 1
+                            ? "https://www.uiw.edu/hebsba/_imgs/events/pitch-competition-2020-promo-in-body-aligned.jpg"
+                            : item.fund_type === 2
+                            ? "https://aofund.org/app/uploads/2023/06/pexels-sora-shimazaki-5668858-1024x683.jpg"
+                            : "https://ssir.org/images/blog/Abby-Davidson-Matt-Guttentag-entrepreneur-accelerators-592x392.jpg"
+                        }
+                        competitionTitle={
+                          item.fund_name !== "" ? item.fund_name : "New Contest"
+                        }
+                        fundingAmount={item.fund_amount}
+                        equityTaken={item.equity_taken ? "True" : "False"}
+                        competitionType={
+                          item.fund_type === 1
+                            ? "Pitch"
+                            : item.fund_type === 2
+                            ? "Grant"
+                            : item.fund_type === 3
+                            ? "Accelerator"
+                            : "Default Type"
+                        }
+                        equityPercentage={item.amount_equity_taken}
+                      />
+                    </div>
+                  );
+                }
 
-                //   if (item.requirements.length !== 0) {
-                //     console.log("This is passesRequirements val: ", item.requirements[0].data.toLowerCase());
-                //   }
-
-                // const passesRequirements = item.requirements.length === 0 || item.requirements[0].data.toLowerCase().includes(getUserInfo[firstWord].toLowerCase());
-
-                return (
-                  <Htag
-                    key={index}
-                    text={`${item.fund_name} - Requirements: ${
-                      passesAllRequirements ? "Passes" : "Does not pass"
-                    }`}
-                  />
-                );
+                return null; // Return null for items that don't meet requirements
               })}
             </div>
           )}
-          
         </div>
-        
+
         <></>
 
         {/* 
