@@ -1,11 +1,31 @@
 import React from 'react';
 
-const Competition = () => {
+const Competition = ({
+  backgroundColor,
+  imageSrc,
+  competitionTitle,
+  fundingAmount,
+  equityTaken,
+  competitionType,
+  equityPercentage
+}) => {
   return (
-    <div className="border" style={{ marginLeft: "0px", marginBottom: "-100px", marginTop: "0px", minWidth: "800px", borderRadius: "3px", height: "170px", width: "1100px", paddingLeft: "300px", position: "relative" }}>
-      <div style={{ position: "absolute", left: "0", top: "0", height: "100%", width: "5px", backgroundColor: "black" }}></div>
+    <div className="border" style={{
+      marginLeft: "0px",
+      marginBottom: "70px",
+      marginTop: "-60px",
+      minWidth: "800px",
+      borderRadius: "3px",
+      height: "170px",
+      width: "1100px",
+      paddingLeft: "300px",
+      position: "relative",
+      backgroundColor: "#ffffff"
+    }}>
+     
+      <div style={{ position: "absolute", left: "0", top: "0", height: "100%", width: "5px", backgroundColor: backgroundColor  }}></div>
       <img
-        src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" // Replace with your image path
+        src={imageSrc} 
         alt="Sample Image"
         style={{
           position: "absolute",
@@ -24,7 +44,7 @@ const Competition = () => {
           fontWeight: "bold",
         }}
       >
-        Female Veterans pitch competition
+        {competitionTitle} 
       </span>
       <span
         style={{
@@ -34,8 +54,30 @@ const Competition = () => {
           fontSize: "20px",
         }}
       >
-        Funding Amount: <b>$20000</b>
+        Funding Amount: <b>{fundingAmount}</b> 
       </span>
+      
+      <span
+        style={{
+          position: "absolute",
+          top: "44px",
+          left: "810px",
+          fontSize: "20px",
+        }}
+      >
+        Competition Type: <b>{competitionType}</b> 
+      </span>
+      <span
+        style={{
+          position: "absolute",
+          top: "84px",
+          left: "810px",
+          fontSize: "20px",
+        }}
+      >
+        Equity Taken: <b>{equityPercentage}</b> 
+      </span>
+
       <span
         style={{
           position: "absolute",
@@ -44,38 +86,9 @@ const Competition = () => {
           fontSize: "20px",
         }}
       >
-        Equity Taken: <b>True</b>
+        Equity Taken: <b>{equityTaken}</b>
       </span>
-      <span
-        style={{
-          position: "absolute",
-          top: "44px",
-          left: "860px",
-          fontSize: "20px",
-        }}
-      >
-        Competition Type: <b>Pitch</b>
-      </span>
-      <span
-        style={{
-          position: "absolute",
-          top: "84px",
-          left: "860px",
-          fontSize: "20px",
-        }}
-      >
-        Equity Taken: <b>15%</b>
-      </span>
-      <div
-        style={{
-          position: "absolute",
-          left: "830px",
-          top: "0",
-          height: "100%",
-          width: "1px",
-          backgroundColor: "lightgray",
-        }}
-      ></div>
+      
     </div>
   );
 };

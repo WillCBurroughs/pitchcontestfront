@@ -27,8 +27,8 @@ const CustomNavbar = ({ activeLink }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <a className="navbar-brand mt-2 mt-lg-0" href="#">
             <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-              height="15"
+              src="https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-6/409556270_781955053946172_3563171695390515738_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=3635dc&_nc_ohc=M3mRKe4QKxoAX_U8YYW&_nc_ht=scontent-ord5-1.xx&oh=00_AfC0RMpBbA0KUoUeMbZnGKt6Ahj5GBKJ3WYjmQvl8RuHsA&oe=657A0942"
+              height="35"
               alt="MDB Logo"
               loading="lazy"
             />

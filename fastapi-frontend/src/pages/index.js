@@ -311,14 +311,45 @@ export default function Home() {
           </div>
         </div>
 
+
         <div>
           {!filterbyUser && (
             <div>
               {filteredData.map((item, index) => (
-                <Htag
-                  key={index}
-                  text={`${item.fund_name} - Funds Available: ${item.fund_amount} equity taken ${item.amount_equity_taken}%`}
-                />
+
+            <Competition
+              key={index}
+
+              backgroundColor={
+                item.fund_type === 1
+                  ? "#000000"
+                  : item.fund_type === 2
+                  ? "#3178E4"
+                  : item.fund_type === 3
+                  ? "#17c27e"
+                  : "#ffffff"
+              }
+              imageSrc= {item.fund_type === 1 ?
+              "https://www.uiw.edu/hebsba/_imgs/events/pitch-competition-2020-promo-in-body-aligned.jpg" :
+              item.fund_type === 2 ? "https://aofund.org/app/uploads/2023/06/pexels-sora-shimazaki-5668858-1024x683.jpg" :
+              "https://ssir.org/images/blog/Abby-Davidson-Matt-Guttentag-entrepreneur-accelerators-592x392.jpg"
+
+              }
+              competitionTitle= {item.fund_name != "" ? item.fund_name : "New Contest"}
+              fundingAmount= {item.fund_amount}
+              equityTaken= {item.equity_taken ? "True" : "False"}
+              competitionType={
+                item.fund_type === 1
+                  ? "Pitch"
+                  : item.fund_type === 2
+                  ? "Grant"
+                  : item.fund_type === 3
+                  ? "Accelerator"
+                  : "Default Type"
+              }
+              equityPercentage= {item.amount_equity_taken}
+            />
+
               ))}
             </div>
           )}
@@ -365,11 +396,14 @@ export default function Home() {
           )}
         </div>
 
-      <Competition/>
-      <Competition/>
+      <>
+
+
+      
+      </>
       
 
-
+{/* 
         <div className={styles.grid}>
           {state.user ? (
             <li className="nav-item">
@@ -383,16 +417,21 @@ export default function Home() {
               <Link href="/login">LoginNow</Link>
             </li>
           )}
-        </div>
+        </div> */}
 
-        <button
+        {/* <button
           className={styles["button-81"]}
           onClick={handleMakeCompetitionClick}
           role="button"
         >
           Go to Make Competition
-        </button>
+        </button> */}
+
       </main>
+
+      
     </>
   );
+
+  
 }

@@ -130,25 +130,24 @@ export default function Home() {
       <main className={`${styles.main}`}>
 
 
+<div class="input-group">
+  <select class="form-select" value = {selectedIdentity} onChange = {handleIdentityChange} id="inputGroupSelect04" aria-label="Example select with button addon">
+    <option value = "">I identify as</option>
+    <option value="male">Man</option>
+    <option value="women">Woman</option>
+    <option value="other">Other</option>
+  </select>
+  <button onClick={handleSaveUserClick} class="btn text-white btn-outline-secondary bg-primary" type="button">Save Chosen Identity</button>
+</div>
 
-      <div className="dropdown">
-          <select value={selectedIdentity} onChange={handleIdentityChange}>
-            <option value="">I identify as</option>
-            <option value="male">Man</option>
-            <option value="women">Woman</option>
-            <option value="other">Other</option>
-          </select>
-          <Button onClick={handleSaveUserClick} text = "Save"/>
-        </div>
-
-        <div className="dropdown">
-          <select value={selectedMilitaryStatus} onChange={handleMilitaryStatusChange}>
-            <option value="">Select Military Status</option>
-            <option value="Veteran">Veteran</option>
-            <option value="Non-Veteran">Non-Veteran</option>
-          </select>
-          <Button onClick={handleSaveUserVeteranClick} text = "Save"/>
-        </div>
+<div class="input-group">
+  <select class="form-select" value = {selectedMilitaryStatus} onChange = {handleMilitaryStatusChange} id="inputGroupSelect05" aria-label="Example select with button addon">
+    <option value = "">Select Military Status</option>
+    <option value="Veteran">Veteran</option>
+    <option value="Non-Veteran">Non-Veteran</option>
+  </select>
+  <button onClick={handleSaveUserVeteranClick} class="btn text-white btn-outline-secondary bg-primary" type="button">Save Service Selection</button>
+</div>
 
         <div className={styles.grid}>
           {state.user ? (

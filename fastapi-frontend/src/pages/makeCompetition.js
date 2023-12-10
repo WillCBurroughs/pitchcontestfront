@@ -305,13 +305,13 @@ const handleCompetitionSelect = (event) => {
         </select>
       </div>
 
-      <label class="form-label" placeholder='Fund Amount'><b>Upload Image for opportunity</b></label>
+      <label class="form-label" value = {fundContactEmail} onChange = {handleEmailInputChange} placeholder='Fund Amount'><b>Upload Contact for opportunity</b></label>
 
       <div class="input-group">
       
       
       
-      <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"/>
+      <input type="text" class="form-control" placeholder='Email' id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"/>
           {/* <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload Image for Competition</button> */}
       </div>
 
@@ -330,7 +330,6 @@ const handleCompetitionSelect = (event) => {
 
 
         {/* <Input value={competitionName} onChange={handleNameInputChange} holder = {"Competition Name"}/> */}
-        <Input value={fundContactEmail} onChange={handleEmailInputChange} holder= {"Fund Contact Email"}/>
 
 
         {/* <select value={equityTaken} onChange={handleEquityTakenChange}>
