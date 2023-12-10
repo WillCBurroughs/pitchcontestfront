@@ -279,40 +279,75 @@ const handleCompetitionSelect = (event) => {
       <CustomNavbar activeLink="competition" />
       <main className={`${styles.main}`}>
         
-      
         <div className="row">
         <div className='col-md-6'>
-        <Input value={competitionName} onChange={handleNameInputChange} holder = {"Competition Name"}/>
-        <Input value={fundContactEmail} onChange={handleEmailInputChange} holder= {"Fund Contact Email"}/>
-        <select value={selectedFundType} onChange={handleFundTypeChange}>
-          <option value="1">Pitch Competition</option>
+        <h2>Upload Opportunity</h2>
+
+      <label> <b>Competition Name </b></label>
+      <div class="input-group mb-3">
+        <input type="text" value={competitionName} onChange={handleNameInputChange} class="form-control" placeholder="Funding Opportunity Name" aria-label="Competition Name" />
+      </div>
+
+      <label> <b>Funding Available </b></label>
+      <div>
+      <input type="number" value={fundAmount} onChange={handleAmountChange} class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"/>
+      </div>
+
+      <label><b>Opportunity Type</b></label>
+      <div class="input-group mb-3">
+        {/* <label class="input-group-text" for="inputGroupSelect01">Opportunity Type</label> */}
+        <select class="form-select" id="inputGroupSelect01" value={selectedFundType} 
+        onChange={handleFundTypeChange}>
+          <option selected>Choose...</option>
+          <option value="1">Pitch Contest</option>
           <option value="2">Grant</option>
           <option value="3">Accelerator</option>
         </select>
+      </div>
 
-        <input
-            type="text"
-            pattern="[0-9]*"
-            inputMode="numeric"
-            value={fundAmount}
-            onChange={handleAmountChange}
-            placeholder="Fund Amount"
-        />
+      <label class="form-label" placeholder='Fund Amount'><b>Upload Image for opportunity</b></label>
 
-        <select value={equityTaken} onChange={handleEquityTakenChange}>
+      <div class="input-group">
+      
+      
+      
+      <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"/>
+          {/* <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload Image for Competition</button> */}
+      </div>
+
+
+
+      <label><b>Equity Taken?</b></label>
+      <div class="input-group mb-3">
+        
+        <select value = {equityTaken} onChange = {handleEquityTakenChange} class="form-select" id="inputGroupSelect02">
+          <option selected>Choose...</option>
+          <option value={false}>Equity Not Taken</option>
+          <option value={true}>Equity Taken</option>
+        </select>
+      </div>
+
+
+
+        {/* <Input value={competitionName} onChange={handleNameInputChange} holder = {"Competition Name"}/> */}
+        <Input value={fundContactEmail} onChange={handleEmailInputChange} holder= {"Fund Contact Email"}/>
+
+
+        {/* <select value={equityTaken} onChange={handleEquityTakenChange}>
             <option value={false}>Equity Not Taken</option>
             <option value={true}>Equity Taken</option>
-        </select>
+        </select> */}
 
         {equityTaken && (
-        <input
-            type="number"
-            value={amountEquityTaken}
-            onChange={handleAmountEquityTakenChange}
-            placeholder="Amount of Equity (0-100)"
-            min={0}
-            max={100}
-        />
+          <>
+          <label><b>Max Percent Equity Taken?</b></label>
+          <div class="input-group mb-3">
+            
+          <input type="number" min = {0} max={100} value={amountEquityTaken} onChange={handleAmountEquityTakenChange} class="form-control"/>
+
+          </div>
+
+        </>
         )}
 
         <br/>
@@ -323,7 +358,7 @@ const handleCompetitionSelect = (event) => {
 
         <div className='col-md-6'>
         <div>
-        <h1>Pitch Competitions</h1>
+        <h2>Pitch Competitions</h2>
               <select value={selectedCompetition} onChange={handleCompetitionSelect}>
                 <option value="">Select a Pitch Competition</option>
                 {pitchCompetitions.map((competition, index) => (

@@ -189,12 +189,13 @@ export default function Home() {
 
   return (
     <>
+      
       <CustomNavbar activeLink="home" />
       <main className={`${styles.main}`}>
-        <form className="d-flex me-0 p-0">
+        <form className="d-flex me-0 p-0" style = {{marginBottom: "-80px"}}>
           <input
             className="form-control me-2 ps-4"
-            style={{ minWidth: "1000px", borderRadius: "40px" }}
+            style={{ minWidth: "1000px", borderRadius: "40px"}}
             type="search"
             placeholder="Find Opportunities"
             aria-label="Search"
@@ -206,7 +207,7 @@ export default function Home() {
           </button>
         </form>
 
-        <div className="container-fluid" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: '800px', width: '1100px'}}>
+        <div className="container-fluid" style={{position: 'absolute', top: '130px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: '800px', width: '1100px'}}>
           <div className="row mt-2" style={{ display: "flex" }}>
             <div className="col">
               <div className="btn-group">
@@ -287,7 +288,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-
+                    
           <div className="row mt-2">
             <div className="col">
               <div className="form-check form-switch">
@@ -366,6 +367,8 @@ export default function Home() {
 
       <Competition/>
       <Competition/>
+      
+
 
         <div className={styles.grid}>
           {state.user ? (

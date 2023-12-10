@@ -2,7 +2,7 @@ import React from 'react';
 
 const Competition = () => {
   return (
-    <div className="border" style={{ marginLeft: "0px", marginBottom: "-20px", marginTop: "0px",minWidth: "800px", borderRadius: "3px", height: "170px", width: "1100px", paddingLeft: "300px", position: "relative" }}>
+    <div className="border" style={{ marginLeft: "0px", marginBottom: "-100px", marginTop: "0px", minWidth: "800px", borderRadius: "3px", height: "170px", width: "1100px", paddingLeft: "300px", position: "relative" }}>
       <div style={{ position: "absolute", left: "0", top: "0", height: "100%", width: "5px", backgroundColor: "black" }}></div>
       <img
         src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" // Replace with your image path
