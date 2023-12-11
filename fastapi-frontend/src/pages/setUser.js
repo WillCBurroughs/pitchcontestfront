@@ -23,6 +23,11 @@ export default function Home() {
 
   const [selectedStudentStatus, setStudentStatus] = useState("");
 
+  const [hoveridentity, sethoveridentity] = useState(false);
+
+  const [hoverveteran, sethoverveteran] = useState(false);
+
+  const [hoverstudent, sethoverstudent] = useState(false);
 
   const handleSelectedStudentChange = (event) => {
     setStudentStatus(event.target.value);
@@ -170,7 +175,7 @@ export default function Home() {
                 onChange={handleIdentityChange}
                 id="inputGroupSelect04"
                 aria-label="Example select with button addon"
-                style={{ width: "40%" }}
+                style={{ width: "40%", boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
               >
                 <option value="">Select Gender Status</option>
                 <option value="male">Man</option>
@@ -178,10 +183,12 @@ export default function Home() {
                 <option value="other">Other</option>
               </select>
               <button
+                onMouseEnter={() => sethoveridentity(true)}
+                onMouseLeave={() => sethoveridentity(false)}
                 onClick={handleSaveUserClick}
                 class="btn text-white btn-outline-secondary "
                 type="button"
-                style={{ width: "30%", background: "#3077e4" }}
+                style={{ width: "30%", background: hoveridentity ? "gray" : "#3077e4", transition: 'background-color 0.3s ease-in-out', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)', border: 'none'}}
               >
                 Save Chosen Identity
               </button>
@@ -194,7 +201,7 @@ export default function Home() {
                 onChange={handleMilitaryStatusChange}
                 id="inputGroupSelect05"
                 aria-label="Example select with button addon"
-                style={{ width: "40%" }}
+                style={{ width: "40%", boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)'}}
               >
                 <option value="">Select Military Status</option>
                 <option value="Veteran">Veteran</option>
@@ -202,9 +209,11 @@ export default function Home() {
               </select>
               <button
                 onClick={handleSaveUserVeteranClick}
+                onMouseEnter={() => sethoverveteran(true)}
+                onMouseLeave={() => sethoverveteran(false)}
                 class="btn text-white btn-outline-secondary mt-4"
                 type="button"
-                style={{ width: "30%", background: "#3077e4" }}
+                style={{ width: "30%", background: hoverveteran ? "gray" : '#3077e4', transition: 'background-color 0.3s ease-in-out', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)', border: 'none'}}
               >
                 Save Service 
               </button>
@@ -217,17 +226,19 @@ export default function Home() {
                 onChange={handleSelectedStudentChange}
                 id="inputGroupSelect06"
                 aria-label="Example select with button addon"
-                style={{ width: "40%" }}
+                style={{ width: "40%", boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
               >
                 <option value="">Select Student Status</option>
                 <option value="Student">Student</option>
                 <option value="Non-Student">Non-Student</option>
               </select>
               <button
+                onMouseEnter={() => sethoverstudent(true)}
+                onMouseLeave={() => sethoverstudent(false)}
                 onClick={handleSaveUserStudentClick}
                 class="btn text-white btn-outline-secondary mt-4"
                 type="button"
-                style={{ width: "30%", background: "#3077e4" }}
+                style={{ width: "30%", background: hoverstudent ? "gray" : '#3077e4', border: 'none', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)', transition: 'background-color 0.3s ease-in-out',}}
               >
                 Save Student Status
               </button>

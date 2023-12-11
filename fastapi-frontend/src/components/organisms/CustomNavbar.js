@@ -39,12 +39,12 @@ const CustomNavbar = ({ activeLink }) => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className={`nav-item ${activeLink === 'home' ? 'active' : ''}`}>
               <a className={`nav-link ${activeLink === 'home' ? 'active' : ''}`} href="/">
-                <b>Search competitions</b>
+                <b style={{fontSize: '20px'}}>Search competitions</b>
               </a>
             </li>
             <li className={`nav-item ${activeLink === 'competition' ? 'active' : ''}`}>
               <a className={`nav-link ${activeLink === 'competition' ? 'active' : ''}`} href="/makeCompetition">
-                <b>Post competition</b>
+                <b style={{fontSize: '20px'}}>Post competition</b>
               </a>
             </li>
           </ul>

@@ -87,11 +87,11 @@ export default function Home() {
 
   const amounts = [
     { label: "All Competitions", value: 0 },
-    { label: "$1000", value: 1000 },
-    { label: "$5000", value: 5000 },
-    { label: "$10000", value: 10000 },
-    { label: "$50000", value: 50000 },
-    { label: "$100000", value: 100000 },
+    { label: "$1000 +", value: 1000 },
+    { label: "$5000 +", value: 5000 },
+    { label: "$10000 +", value: 10000 },
+    { label: "$50000 +", value: 50000 },
+    { label: "$100000 +", value: 100000 },
   ];
 
   const equities = [
@@ -238,6 +238,7 @@ export default function Home() {
                     style={{
                       backgroundColor: hovercomp ? 'gray' : '#3178e4',
                       transition: 'background-color 0.3s ease-in-out',
+                      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
                       minWidth: "70px",
                       float: "right",
                       border: 'none',
@@ -282,6 +283,7 @@ export default function Home() {
                     style={{
                       backgroundColor: hoverfund ? 'gray' : '#3178e4',
                       transition: 'background-color 0.3s ease-in-out',
+                      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
                       minWidth: "70px",
                       float: "right",
                       border: "none",

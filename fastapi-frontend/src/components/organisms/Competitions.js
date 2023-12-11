@@ -33,6 +33,7 @@ const Competition = ({
           top: "17px",
           width: "126px",
           height: "126px",
+          borderRadius: '10px',
         }}
       />
       <span
