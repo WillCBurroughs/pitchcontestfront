@@ -75,7 +75,7 @@ const Competition = ({
           fontSize: "20px",
         }}
       >
-        Equity Taken: <b>{equityPercentage}</b> 
+        Equity Taken: <b>{equityPercentage}</b>%
       </span>
 
       <span

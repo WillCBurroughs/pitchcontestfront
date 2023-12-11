@@ -55,7 +55,7 @@ export default function Home() {
         const response = await axios.get(
           "http://127.0.0.1:8000/api/v1/funding/"
         );
-        setData(response.data); // Assuming the data is in response.data
+        setData(response.data.reverse()); // Assuming the data is in response.data
       } catch (error) {
         console.error("Error fetching data:", error);
       }

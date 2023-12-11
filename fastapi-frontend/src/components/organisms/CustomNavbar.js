@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { faBars, faBriefcase, faBell } from '@fortawesome/fontawesome-free-solid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import Image from 'next/image'
+import logo from './logo.png'
+import logosvg from "./F C.svg"
 
 const CustomNavbar = ({ activeLink }) => {
 
@@ -26,12 +28,13 @@ const CustomNavbar = ({ activeLink }) => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <a className="navbar-brand mt-2 mt-lg-0" href="#">
-            <img
-              src="https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-6/409556270_781955053946172_3563171695390515738_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=3635dc&_nc_ohc=M3mRKe4QKxoAX_U8YYW&_nc_ht=scontent-ord5-1.xx&oh=00_AfC0RMpBbA0KUoUeMbZnGKt6Ahj5GBKJ3WYjmQvl8RuHsA&oe=657A0942"
-              height="35"
-              alt="MDB Logo"
-              loading="lazy"
-            />
+
+                 <Image
+                  src={logosvg}
+                  width={55}
+                  height={55}
+                  alt="Picture of the author"
+                /> 
           </a>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className={`nav-item ${activeLink === 'home' ? 'active' : ''}`}>

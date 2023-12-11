@@ -195,7 +195,9 @@ export default function Competition() {
     if (selectedRequirement === "Gender") {
       setRequirementSelected(3); // Gender requirement ID
     } else if (selectedRequirement === "Veteran") {
-      setRequirementSelected(4);
+      setRequirementSelected(19);
+    } else if (selectedRequirement === "Student"){
+      setRequirementSelected(5);
     }
   };
 
@@ -213,6 +215,7 @@ export default function Competition() {
     }
   };
 
+
   const [requirementSelected, setRequirementSelected] = useState(0);
 
   const handleRequirementSelectedChange = (event) => {
@@ -225,17 +228,30 @@ export default function Competition() {
     setVeteranStatus(event.target.value);
   };
 
+  const [studentStatus, setStudentRequirements] = useState([]);
+
+  const handleStudentStatusChange = (event) => {
+    setStudentRequirements(event.target.value)
+  }
+
   const requirementHandlers = {
     Gender: () => ({
       requirement_id: 3,
       data: "gender:" + genderRequirements.join(","),
     }),
     Veteran: () => ({
-      requirement_id: 4,
+      requirement_id: 19,
       data: "is_veteran:" + handleVeteranStatus(),
     }),
-    // Add more requirement handlers as needed
+    Student: () => ({
+      requirement_id: 5,
+      data: "university_name:" + handleStudentStatus()
+    }),
   };
+
+  const handleStudentStatus = () => {
+    return studentStatus;
+  }
 
   const handleVeteranStatus = () => {
     return veteranStatus;
@@ -284,7 +300,7 @@ export default function Competition() {
       >
         <div className="row">
           <div className="col-md-6">
-            <h2 className="mb-5">Upload Opportunity</h2>
+            <h2 className="mb-5" style={{fontWeight: '700'}}>Upload Opportunity</h2>
 
             <label>
               {" "}
@@ -399,11 +415,13 @@ export default function Competition() {
 
             <br />
 
+
             <Button
               onClick={handleButtonClick}
               text="Create Funding Opportunity"
-              className={"mb-1"}
+              className={"mb-1 "}
             />
+
             <div className="col-12" style={{ height: "50px" }}></div>
           </div>
 
@@ -425,7 +443,7 @@ export default function Competition() {
 
           <div className="col-md-6">
             <div>
-              <h2 className="mb-5 ms-5">Opportunity Requirements</h2>
+              <h2 className="mb-5 ms-5" style={{fontWeight: '700'}} >Opportunity Requirements</h2>
               <label className="ms-5">
                 <b>Select Funding Opportunity?</b>
               </label>
@@ -475,6 +493,7 @@ export default function Competition() {
                     <option value="Gender">Gender Requirement</option>
                     {/* Add 'Gender Requirement' option */}
                     <option value="Veteran">Veteran Requirement</option>
+                    <option value="Student">Student Requirement</option>
                   </select>
                 </>
               )}
@@ -526,6 +545,24 @@ export default function Competition() {
                       <option value="">Select Veteran Status</option>
                       <option value="Veteran">Only Veterans</option>
                       <option value="Non-Veteran">All aplicants</option>
+                    </select>
+                  </div>
+                )}
+
+              {showApplicantRequirements &&
+                applicantRequirement === "Student" && (
+                  <div>
+                  <label class="ms-5 me-5">
+                    <b>Competition is open to?</b>
+                  </label>
+                    <select
+                      class = "form-select ms-5"
+                      value={studentStatus}
+                      onChange={handleStudentStatusChange}
+                    >
+                      <option value="">Select Student Status</option>
+                      <option value="Student">Only Students</option>
+                      <option value="Non-Student">All aplicants</option>
                     </select>
                   </div>
                 )}
