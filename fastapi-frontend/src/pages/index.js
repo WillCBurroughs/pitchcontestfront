@@ -23,6 +23,10 @@ export default function Home() {
   const [selectedEquity, setSelectedEquity] = useState("all");
   const [filteredData, setFilteredData] = useState([]);
 
+  const [hovercomp, sethovercomp] = useState(false);
+  const [hoverfund, sethoverfund] = useState(false);
+
+
   const [filterbyUser, setFilterbyUser] = useState(false);
   const [getfiltered, setfiltered] = useState();
 
@@ -228,10 +232,15 @@ export default function Home() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     placeholder="All Comps"
+                    onMouseEnter={() => sethovercomp(true)}
+                    onMouseLeave={() => sethovercomp(false)}
+
                     style={{
-                      backgroundColor: "#3178e4",
+                      backgroundColor: hovercomp ? 'gray' : '#3178e4',
+                      transition: 'background-color 0.3s ease-in-out',
                       minWidth: "70px",
                       float: "right",
+                      border: 'none',
                     }}
                   >
                     <span className="ms-auto">
@@ -267,10 +276,15 @@ export default function Home() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     placeholder="All Comps"
+                    onMouseEnter={() => sethoverfund(true)}
+                    onMouseLeave={() => sethoverfund(false)}
+                    
                     style={{
-                      backgroundColor: "#3178e4",
+                      backgroundColor: hoverfund ? 'gray' : '#3178e4',
+                      transition: 'background-color 0.3s ease-in-out',
                       minWidth: "70px",
                       float: "right",
+                      border: "none",
                     }}
                   >
                     <span className="ms-auto">

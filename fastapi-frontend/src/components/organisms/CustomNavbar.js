@@ -27,7 +27,7 @@ const CustomNavbar = ({ activeLink }) => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <a className="navbar-brand mt-2 mt-lg-0" href="#">
+          <a className="navbar-brand mt-2 mt-lg-0" href="/">
 
                  <Image
                   src={logosvg}
