@@ -454,7 +454,7 @@ export default function Competition() {
                   class="form-select ms-5 mb-3"
                 >
                   <option value="">Select a Competition</option>
-                  {pitchCompetitions.map((competition, index) => (
+                  {pitchCompetitions.reverse().map((competition, index) => (
                     <option key={index} value={competition.id}>
                       {competition.fund_name}
                     </option>

@@ -23,7 +23,7 @@ const Competition = ({
       backgroundColor: "#ffffff"
     }}>
      
-      <div style={{ position: "absolute", left: "0", top: "0", height: "100%", width: "5px", backgroundColor: backgroundColor  }}></div>
+      <div style={{ position: "absolute", left: "0", top: "0", height: "100%", width: "5px", backgroundColor: backgroundColor }}></div>
       <img
         src={imageSrc} 
         alt="Sample Image"
@@ -33,7 +33,7 @@ const Competition = ({
           top: "17px",
           width: "126px",
           height: "126px",
-          borderRadius: '10px',
+          borderRadius: '4px',
         }}
       />
       <span
@@ -62,7 +62,7 @@ const Competition = ({
         style={{
           position: "absolute",
           top: "44px",
-          left: "810px",
+          left: "760px",
           fontSize: "20px",
         }}
       >
@@ -72,7 +72,7 @@ const Competition = ({
         style={{
           position: "absolute",
           top: "84px",
-          left: "810px",
+          left: "760px",
           fontSize: "20px",
         }}
       >
