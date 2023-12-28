@@ -2,6 +2,7 @@ import { createContext, useReducer, useContext } from 'react';
 // Define the initial state
 const initialState = {
   user: null,
+  navbarIsHome: Boolean,
 };
 // Create a context object
 const GlobalStateContext = createContext();
@@ -15,6 +16,7 @@ function reducer(state, action) {
       return state;
   }
 }
+
 
 // Provider component to wrap the app
 export function GlobalStateProvider({ children }) {
